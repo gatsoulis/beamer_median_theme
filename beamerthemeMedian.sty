@@ -1,0 +1,379 @@
+%% Preamble
+\mode<presentation>
+\RequirePackage{pgfcomp-version-0-65, textpos, xcolor, tikz, mwe}
+
+
+%\voffset=2cm
+%\topmargin=2cm
+%\headsep=2cm
+%\headheight=3cm
+%\leftmargin=2cm
+
+% color theme option, colors set later
+%\newcommand\setmyvariable[1]{\getmyvariable{#1}}
+%\setmyvariable{}
+
+%\DeclareOption{redish}[false]{\@redish}
+%\ProcessOptions
+
+%\DeclareOptionBeamer{redish}[false]{\def\beamer@redish{#1}}
+%%\ExecuteOptionsBeamer{shadow=false}
+%\ProcessOptionsBeamer
+
+%\newif\if@doMyOption
+%\@doMyOptionfalse
+%\DeclareOption{myoption}{\@doMyOptiontrue}
+%\ProcessOptions
+
+%\newif\if@colorDefault
+%\@colorDefaulttrue
+
+% blue1 -> Folio
+% blue2 -> Sky
+% brown1 -> Formal
+% brownblue1 -> Median
+% gray1 -> Grayscale
+% gray2 -> gray1 reversed
+% gray3 -> Angles
+% green1 -> Foundry
+% red1 -> Inkwell
+
+
+% Grayscale
+\newif\if@ctGrayscale
+\@ctGrayscalefalse
+\DeclareOption{gray1}{\@ctGrayscaletrue}
+% Grayscale
+\newif\if@ctGrayscaleReversed
+\@ctGrayscaleReversedfalse
+\DeclareOption{gray2}{\@ctGrayscaleReversedtrue}
+% Angles
+\newif\if@ctAngles
+\@ctAnglesfalse
+\DeclareOption{gray3}{\@ctAnglestrue}
+% Folio
+\newif\if@ctFolio
+\@ctFoliofalse
+\DeclareOption{blue1}{\@ctFoliotrue}
+% Formal
+\newif\if@ctFormal
+\@ctFormalfalse
+\DeclareOption{brown1}{\@ctFormaltrue}
+% Foundry
+\newif\if@ctFoundry
+\@ctFoundryfalse
+\DeclareOption{green1}{\@ctFoundrytrue}
+% Inkwell
+\newif\if@ctInkwell
+\@ctInkwellfalse
+\DeclareOption{red1}{\@ctInkwelltrue}
+% Median
+\newif\if@ctMedian
+\@ctMedianfalse
+\DeclareOption{brownblue1}{\@ctMediantrue}
+% Sky
+\newif\if@ctSky
+\@ctSkyfalse
+\DeclareOption{blue2}{\@ctSkytrue}
+
+\ProcessOptions
+
+\if@ctGrayscale
+\definecolor{ColorBigBox}{RGB}{221,221,221}
+\definecolor{ColorSmallBox}{RGB}{178,178,178}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else\if@ctGrayscaleReversed
+\definecolor{ColorBigBox}{RGB}{178,178,178}
+\definecolor{ColorSmallBox}{RGB}{221,221,221}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else\if@ctAngles
+\definecolor{ColorBigBox}{RGB}{121,123,126}
+\definecolor{ColorSmallBox}{RGB}{249, 106, 27}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0, 0, 0}
+\definecolor{ColorBigBoxText}{RGB}{255, 255, 255}
+\definecolor{ColorSmallBoxText}{RGB}{255, 255, 255}
+
+\else\if@ctFolio
+\definecolor{ColorBigBox}{RGB}{41,65,113}
+\definecolor{ColorSmallBox}{RGB}{116,140,188}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0, 0, 0}
+\definecolor{ColorBigBoxText}{RGB}{255, 255, 255}
+\definecolor{ColorSmallBoxText}{RGB}{255, 255, 255}
+
+\else\if@ctFormal
+\definecolor{ColorBigBox}{RGB}{144,127,118}
+\definecolor{ColorSmallBox}{RGB}{164,102,69}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else\if@ctFoundry
+\definecolor{ColorBigBox}{RGB}{114,163,118}
+\definecolor{ColorSmallBox}{RGB}{176, 204, 176}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0, 0, 0}
+\definecolor{ColorBigBoxText}{RGB}{255, 255, 255}
+\definecolor{ColorSmallBoxText}{RGB}{255, 255, 255}
+
+\else\if@ctInkwell
+\definecolor{ColorBigBox}{RGB}{134,9,8}
+\definecolor{ColorSmallBox}{RGB}{74,5,5}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else\if@ctMedian
+\definecolor{ColorBigBox}{RGB}{148,182,210}
+\definecolor{ColorSmallBox}{RGB}{221,128,71}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else\if@ctSky
+\definecolor{ColorBigBox}{RGB}{7,55,121}
+\definecolor{ColorSmallBox}{RGB}{143,217,251}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\else
+\definecolor{ColorBigBox}{RGB}{178,178,178}
+\definecolor{ColorSmallBox}{RGB}{221,221,221}
+\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+\definecolor{ColorMain}{rgb}{0,0,0}
+\definecolor{ColorBigBoxText}{RGB}{255,255,255}
+\definecolor{ColorSmallBoxText}{RGB}{255,255,255}
+
+\fi\fi\fi\fi\fi\fi\fi\fi\fi
+
+
+
+%% Variables
+\newcommand\titlelogo[1]{\def\inserttitlelogo{#1}}
+\titlelogo{blank}
+
+\newcommand\titlehandout[1]{\def\inserttitlehandout{#1}}
+\titlehandout{~}
+
+\newcommand\titlesmallboxtext[1]{\def\inserttitlesmallboxtext{#1}}
+\titlesmallboxtext{~}
+
+\newcommand\titlebigboxtext[1]{\def\inserttitlebigboxtext{#1}}
+\titlebigboxtext{~}
+
+\newcommand\footerleft[1]{\def\insertfooterleft{#1}}
+\footerleft{\insertauthor}
+
+\newcommand\footermid[1]{\def\insertfootermid{#1}}
+\footermid{\inserttitle}
+
+
+%% Colors
+%\definecolor{ColorBgCanvas}{RGB}{230,230,250}
+%\ifnum\pdfstrcmp{\getmycolortheme}{redish}=0
+%\definecolor{ColorBgCanvas}{RGB}{0,0,0}
+%\definecolor{ColorMain}{rgb}{255, 255, 255} % (rgb - 0, 0, 0) is nothing but black
+%\definecolor{ColorBigBox}{RGB}{0,0,0}
+%\definecolor{ColorBigBoxText}{RGB}{255, 255, 255}
+%\definecolor{ColorSmallBox}{RGB}{0,0,0}
+%\definecolor{ColorSmallBoxText}{RGB}{255, 255, 255}
+%\fi
+%
+%\ifnum\pdfstrcmp{\getmycolortheme}{blueish}=0
+%\definecolor{ColorBgCanvas}{RGB}{255,255,255}
+%\definecolor{ColorMain}{rgb}{0, 0, 0} % (rgb - 0, 0, 0) is nothing but black
+%\definecolor{ColorBigBox}{RGB}{41,65,113}
+%\definecolor{ColorBigBoxText}{RGB}{255, 255, 255}
+%\definecolor{ColorSmallBox}{RGB}{116,140,188}
+%\definecolor{ColorSmallBoxText}{RGB}{255, 255, 255}
+%%\else
+%\fi
+
+
+
+% This sets the colour of the title of the presentation and titles of all the slides in the presentation to black.
+\setbeamercolor{frametitle}{fg = ColorMain}
+\setbeamercolor{title}{fg = ColorMain}
+
+% In case you choose to display the Table of Contents, or the Outline slide.
+\setbeamercolor{section in toc}{fg = ColorMain}
+\setbeamercolor{section in toc shaded}{fg = ColorMain} 
+
+% The colour of all the items, subitems and and subsubitems are set to black.
+% NOTE: Setting the color black for all the items also sets in black for other environemnts like enumerate
+\setbeamercolor{item}{fg = ColorMain}
+\setbeamercolor{subitem}{fg = ColorMain}
+\setbeamercolor{subsubitem}{fg = ColorMain}
+
+% This sets the color for each item heading of the description environment.
+%\setbeamercolor{description item}{fg = Descitem}
+
+% colours for captions for figures and tables.
+\setbeamercolor{caption}{fg = ColorMain}
+\setbeamercolor{caption name}{fg = ColorMain}
+
+% In addition, we can also change the background colour of the slides depending on pur requirement.
+%\setbeamercolor{background canvas}{bg=ColorBgCanvas}
+
+% the colour of the text
+\setbeamercolor{normal text}{fg=ColorMain}
+
+%% Blocks
+%\setlength{\blockleftindent}{10mm}
+% Standard block
+\setbeamercolor{block title}{bg=ColorSmallBox, fg=ColorSmallBoxText}
+\setbeamercolor{block body}{bg=ColorSmallBox!20}
+
+% Alert block
+\setbeamercolor{block title alerted}{bg=ColorSmallBox, fg=ColorSmallBoxText}
+\setbeamercolor{block body alerted}{bg=white}
+
+% Example block
+\setbeamercolor{block title example}{bg=ColorSmallBox, fg=ColorSmallBoxText}
+\setbeamercolor{block body example}{bg=white}
+
+
+%%%%
+%% Font theme
+% Here we are using default fonts
+\usefonttheme{professionalfonts}
+
+%\setbeamerfont{}{size=\Large}
+%\setbeamerfont{normal text}{size=\Large}
+
+% Font of the frame titles
+\setbeamerfont{frametitle}{size=\Large}
+
+
+%%%%
+%% Inner theme
+\useinnertheme{rectangles}
+
+%% Lists
+\setlength{\leftmargini}{4mm}
+\setbeamertemplate{itemize item}{\tikz{\draw[color=ColorSmallBox, semithick] rectangle(.18,.18);}}
+%\setbeamertemplate{itemize/enumerate body begin}{\normalsize}
+\setbeamertemplate{itemize subitem}{\tikz{\draw[color=ColorBigBox, ultra thick] rectangle(.15,.15);}}
+\setbeamertemplate{itemize subsubitem}{\tikz{\draw[color=ColorSmallBox, semithick, fill] rectangle(.12,.12);}}
+\setbeamertemplate{sections/subsections in toc}[square]
+
+
+% The default option for enumerate environment removes the circles around the numbers provided by the "rounded" inner theme. Just simple numbers remain.
+\setbeamertemplate{enumerate items}[default]
+\setbeamerfont{enumerate item}{size=\small}
+
+%%%%
+%% Outer theme
+\newcommand{\MedianLine}{%
+\ifnum \insertpagenumber=1
+\else 
+\raisebox{-15mm}[0pt][0pt]{%
+\begin{pgfpicture}{0mm}{0mm}{0mm}{0mm}
+\pgfsetlinewidth{3mm}
+\color{ColorSmallBox}
+\pgfline{\pgfpoint{-1cm}{0mm}}{\pgfpoint{-0.1cm}{0mm}}%
+\pgfsetlinewidth{3mm}
+\color{ColorBigBox}
+\pgfline{\pgfpoint{0mm}{0mm}}{\pgfpoint{12cm}{0mm}}%
+\end{pgfpicture}}
+\fi}
+
+% Include the line that we just created in the headline
+\setbeamertemplate{headline}[text line]{\MedianLine}
+
+
+% Now that we have changed the headline, we will need to orient the frame titles in a way that the come at the right stop just above the horizontal line.
+\setbeamertemplate{frametitle}{
+\vspace*{4mm}\hspace*{0mm}\insertframetitle \vspace{0.75cm}}
+
+
+
+%% Footline
+\newcommand{\Ffootline}{%
+\ifnum \insertpagenumber=1
+\else
+\centering\hspace{-0.6cm}\textcolor{gray!50!}{\rule{1.1\paperwidth}{.2pt}}\vspace{2.5pt}\newline
+$~$\hspace{18pt}\insertfooterleft % left part of footer
+\hfill
+\insertfootermid % mid part of footer
+\hfill
+\insertsection~~~~\insertframenumber % And the right end
+\fi
+}
+
+\setbeamertemplate{footline}{%
+\usebeamerfont{structure}
+\begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{title in head/foot}%
+\Tiny\hspace*{4mm} \Ffootline \hspace{4mm}
+\end{beamercolorbox}}
+
+
+%% Remove the navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+
+% We declare the image that will be used as the logo
+%\pgfdeclareimage[width = 0.40\paperwidth]{big}{leeds_logo.png}
+
+%% Title page
+\setbeamertemplate{title page}{
+%\begin{textblock*}{12cm}(6cm,-4.75cm)
+%\colorbox{ColorBgCanvas}{%
+%\begin{minipage}[t][3cm][b]{10cm}
+%\pgfuseimage{big}
+%\end{minipage}}
+%\end{textblock*}
+
+\begin{textblock*}{6cm}(-.75cm,-5.5cm)
+	\colorbox{ColorBgCanvas}{%
+		\begin{minipage}[t][3cm][b]{9cm}
+			{\flushleft\color{black}\footnotesize\inserttitlehandout\\\insertdate}
+		\end{minipage}}
+\end{textblock*}
+
+\begin{textblock*}{6cm}(6.25cm,-5cm)
+	\colorbox{ColorBgCanvas}{%
+		\begin{minipage}[t][3cm][b]{9cm}
+			{\includegraphics[width=5cm]{\inserttitlelogo}}
+		\end{minipage}}
+\end{textblock*}
+	
+	
+\begin{textblock*}{12cm}(2.15cm,1cm)
+\colorbox{ColorBgCanvas}{%
+\begin{minipage}[t][3cm][b]{9cm}
+{\flushleft\color{black}\Large\inserttitle\\~\\\large\insertauthor}
+\end{minipage}}
+\end{textblock*}
+
+\begin{textblock*}{3cm}(-1cm,5cm)
+\colorbox{ColorSmallBox}{%
+\begin{minipage}[t][6mm][c]{2.75cm}
+{\color{ColorSmallBoxText}\small\inserttitlesmallboxtext}
+\end{minipage}}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(2.15cm,5cm)
+\colorbox{ColorBigBox}{%
+\begin{minipage}[t][6mm][c]{10cm}
+{\color{ColorBigBoxText}\small\inserttitlebigboxtext}
+\end{minipage}}
+\end{textblock*}
+}
+
+\mode
+<all>
